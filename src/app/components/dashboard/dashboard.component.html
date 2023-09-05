@@ -1,3 +1,23 @@
 <h1>Dashboard</h1>
 
-<p>Here the work begins...</p>
+<title>Modules</title>
+<table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let module of data.modules">
+        <td>{{ module.name }}</td>
+        <td>{{ module.type }}</td>
+        <td *ngFor="let input of module.input">
+            Input {{ input.name }}: {{ input.amount }}
+        </td>
+        <td *ngFor="let output of module.output">
+            Output {{ output.name }}: {{ output.amount }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
