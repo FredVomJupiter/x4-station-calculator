@@ -1,23 +1,44 @@
-<h1>Dashboard</h1>
+<section class="container">
 
-<title>Modules</title>
-<table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Type</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let module of data">
-        <td>{{ module.name }}</td>
-        <td>{{ module.type }}</td>
-        <td *ngFor="let input of module.input">
-            Input {{ input.name }}: {{ input.amount }}
-        </td>
-        <td *ngFor="let output of module.output">
-            Output {{ output.name }}: {{ output.amount }}
-        </td>
-      </tr>
-    </tbody>
+  <h4>Select Station Module</h4>
+
+  <mat-form-field>
+    <mat-label>Station Modules</mat-label>
+    <mat-select>
+      <mat-option>None</mat-option>
+      <mat-option *ngFor="let module of data" [value]="module.name" (click)="addToList(module)">{{module.name}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+</section>
+
+<section class="container">
+
+  <table mat-table [dataSource]="list" class="mat-elevation-z8">
+
+    <!-- Amount Column -->
+    <ng-container matColumnDef="amount">
+      <th mat-header-cell *matHeaderCellDef> Amount </th>
+      <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef> Type </th>
+      <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+    </ng-container>
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
+
+
+
+</section>
