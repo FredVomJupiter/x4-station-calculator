@@ -27,9 +27,16 @@
             <input matInput maxlength="3" value={{element.amount}} id={{element.name}} (keyup)="setAmount(element)" >
           </mat-form-field>
           <div class="vertical">
-            <button mat-button color="primary" (click)="increaseAmount(element)">+</button>
-            <button mat-button color="primary" (click)="decreaseAmount(element)">-</button>
+            <button mat-button color="primary" (click)="increaseAmount(element)">
+              <mat-icon aria-hidden="false" fontIcon="add"></mat-icon>
+            </button>
+            <button mat-button color="primary" (click)="decreaseAmount(element)">
+              <mat-icon aria-hidden="false" fontIcon="remove"></mat-icon>
+            </button>
           </div>
+          <button mat-button color="secondary" (click)="remove(element)">
+            <mat-icon aria-hidden="false" fontIcon="delete"></mat-icon>
+          </button>
         </form>
       </td>
     </ng-container>

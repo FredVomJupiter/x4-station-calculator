@@ -13,6 +13,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule} from '@angular/material/form-field';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { MatButtonModule } from '@angular/material/button';
     MatSelectModule,
     MatFormFieldModule,
     MatTableModule,
-    MatButtonModule
+    MatButtonModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]
