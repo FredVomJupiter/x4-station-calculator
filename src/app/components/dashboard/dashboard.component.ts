@@ -4,10 +4,10 @@ import { DataService } from 'src/app/shared/data.service';
 
 interface Module {
   name: string;
-  type?: string;
-  style?: string;
-  input?: object[] | null;
-  output?: object[] | null;
+  type: string;
+  style: string;
+  input: object[] | null;
+  output: object[] | null;
   amount: number;
 }
 
@@ -19,10 +19,12 @@ interface Module {
 export class DashboardComponent implements OnInit {
 
   data = this.dataService.getData().modules
-  .sort((a: { name: string; }, b: { name: any; }) =>
-  a.name.localeCompare(b.name));
+    .sort((a: { name: string; }, b: { name: any; }) =>
+      a.name.localeCompare(b.name));
 
   public list: Module[] = [];
+  copy: Module[] = [];
+  filtering: boolean = false;
   displayedColumns: string[] = ['amount', 'name', 'type'];
 
   @ViewChild(MatTable) table: MatTable<any> | undefined;
@@ -72,6 +74,7 @@ export class DashboardComponent implements OnInit {
 
   remove(module: Module) {
     this.list = this.list.filter(item => item.name !== module.name);
+    this.copy = this.copy.filter(item => item.name !== module.name);
     this.table?.renderRows();
   }
 
@@ -105,6 +108,37 @@ export class DashboardComponent implements OnInit {
       if (item.name === module.name) {
         (document.getElementById(`${module.name}`) as HTMLInputElement).value = String(item.amount);
       }
+    });
+  }
+
+
+  applyFilter(event: Event) {
+    this.doPrechecks();
+    let filterValue = (event.target as HTMLInputElement).value;
+    if (filterValue === '') {
+      this.resetFilter();
+    } else {
+      this.useFilter(filterValue);
+    }
+  }
+
+
+  doPrechecks() {
+    this.filtering === false ? this.copy = this.list : null;
+    this.filtering = true;
+  }
+
+
+  resetFilter() {
+    this.list = this.copy;
+    this.filtering = false;
+  }
+
+
+  useFilter(filterValue: string) {
+    let trimLow = filterValue.trim().toLowerCase();
+    this.list = this.list.filter((module) => {
+      return (module.name.trim().toLowerCase().includes(trimLow) || module.type.trim().toLowerCase().includes(trimLow));
     });
   }
 

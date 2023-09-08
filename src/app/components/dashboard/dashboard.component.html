@@ -15,6 +15,11 @@
 
 <section class="container">
 
+  <mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Filter" #input>
+  </mat-form-field>
+
   <table mat-table [dataSource]="list" class="mat-elevation-z8">
 
     <!-- Amount Column -->
@@ -32,7 +37,7 @@
               <mat-icon aria-hidden="false" fontIcon="remove"></mat-icon>
             </button>
           </div>
-          <button mat-button color="secondary" (click)="remove(element)">
+          <button mat-button color="warn" (click)="remove(element)">
             <mat-icon aria-hidden="false" fontIcon="delete"></mat-icon>
           </button>
         </form>
