@@ -2,14 +2,21 @@
 
   <h4>Select Station Module</h4>
 
-  <mat-form-field>
-    <mat-label>Station Modules</mat-label>
-    <mat-select>
-      <mat-option>None</mat-option>
-      <mat-option *ngFor="let module of data" [value]="module.name"
-        (click)="addToList(module)">{{module.name}}</mat-option>
-    </mat-select>
-  </mat-form-field>
+  <div class="center">
+    <mat-form-field>
+      <mat-label>Station Modules</mat-label>
+      <mat-select multiple [(ngModel)]="selection">
+        <mat-option *ngFor="let module of data" [value]="module.name"
+          (click)="addToList(module)">{{module.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-button color="warn" (click)="openDialog()">
+      <mat-icon aria-hidden="false" fontIcon="delete"></mat-icon>
+      reset
+    </button>
+  </div>
+
 
 </section>
 
@@ -28,7 +35,8 @@
       <td mat-cell *matCellDef="let element">
 
         <form class="counter">
-          <input class="input-counter" maxlength="3" value={{element.amount}} id={{element.name}} (keyup)="setAmount(element)">
+          <input class="input-counter" maxlength="3" value={{element.amount}} id={{element.name}}
+            (keyup)="setAmount(element)">
           <div class="vertical">
             <button mat-button color="primary" (click)="increaseAmount(element)">
               <mat-icon aria-hidden="false" fontIcon="add"></mat-icon>

@@ -1,6 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTable } from '@angular/material/table';
 import { DataService } from 'src/app/shared/data.service';
+import { MatDialog } from '@angular/material/dialog';
+
+import { DeleteComponent } from 'src/app/dialog/delete/delete.component';
 
 interface Module {
   name: string;
@@ -25,14 +28,16 @@ export class DashboardComponent implements OnInit {
   public list: Module[] = [];
   copy: Module[] = [];
   filtering: boolean = false;
+  selection: Module[] = [];
   displayedColumns: string[] = ['amount', 'name', 'type'];
 
   @ViewChild(MatTable) table: MatTable<any> | undefined;
 
 
-  constructor(private dataService: DataService) {
-
-  }
+  constructor(
+    private dataService: DataService,
+    public dialog: MatDialog
+    ) {}
 
   ngOnInit(): void {
 
@@ -40,7 +45,7 @@ export class DashboardComponent implements OnInit {
 
 
   addToList(module: Module) {
-    this.exists(module) ? this.increaseAmount(module) : this.list.push({ ...module, amount: 1 });
+    this.exists(module) ? this.remove(module) : this.list.push({ ...module, amount: 1 });
     this.table?.renderRows();
   }
 
@@ -75,6 +80,14 @@ export class DashboardComponent implements OnInit {
   remove(module: Module) {
     this.list = this.list.filter(item => item.name !== module.name);
     this.copy = this.copy.filter(item => item.name !== module.name);
+    this.table?.renderRows();
+  }
+
+
+  removeAll() {
+    this.list = [];
+    this.copy = [];
+    this.selection = [];
     this.table?.renderRows();
   }
 
@@ -139,6 +152,19 @@ export class DashboardComponent implements OnInit {
     let trimLow = filterValue.trim().toLowerCase();
     this.list = this.list.filter((module) => {
       return (module.name.trim().toLowerCase().includes(trimLow) || module.type.trim().toLowerCase().includes(trimLow));
+    });
+  }
+
+
+  openDialog(): void {
+    let dialogRef = this.dialog.open(DeleteComponent, {
+      width: '250px',
+    });
+  
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+      if (result === true) {
+        this.removeAll();
+      }
     });
   }
 
