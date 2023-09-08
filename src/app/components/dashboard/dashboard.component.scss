@@ -3,3 +3,15 @@
     margin: 0 auto;
     max-width: 1024px;
 }
+
+.counter {
+    display: flex;
+    width: 200px !important;
+    box-sizing: border-box;
+    align-items: center;
+}
+
+.vertical {
+    display: flex;
+    flex-direction: column;
+}

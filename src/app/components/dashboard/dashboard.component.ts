@@ -18,7 +18,9 @@ interface Module {
 })
 export class DashboardComponent implements OnInit {
 
-  data = this.dataService.getData().modules.sort((a: { name: string; }, b: { name: any; }) => a.name.localeCompare(b.name));
+  data = this.dataService.getData().modules
+  .sort((a: { name: string; }, b: { name: any; }) =>
+  a.name.localeCompare(b.name));
 
   public list: Module[] = [];
   displayedColumns: string[] = ['amount', 'name', 'type'];
@@ -31,26 +33,79 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+
   }
 
 
   addToList(module: Module) {
-    console.log("Selected:", module);
-    if (this.list.some(item => item.name === module.name)) {
-      // set amount +1 if already in list
-      this.list.forEach(item => {
-        if (item.name === module.name) {
-          item.amount++;
-        }
-      });
-    } else {
-      let newModule = { ...module, amount: 1 };
-      this.list.push(newModule);
-    }
+    this.exists(module) ? this.increaseAmount(module) : this.list.push({ ...module, amount: 1 });
     this.table?.renderRows();
   }
 
 
+  exists(module: Module) {
+    return this.list.some(item => item.name === module.name);
+  }
+
+
+  increaseAmount(module: Module) {
+    this.list.forEach(item => {
+      if (item.name === module.name) {
+        item.amount++;
+      }
+    });
+  }
+
+
+  decreaseAmount(module: Module) {
+    this.list.forEach(item => {
+      if (item.name === module.name) {
+        if (item.amount > 1) {
+          item.amount--;
+        } else {
+          this.remove(module);
+        }
+      }
+    });
+  }
+
+
+  remove(module: Module) {
+    this.list = this.list.filter(item => item.name !== module.name);
+    this.table?.renderRows();
+  }
+
+
+  setAmount(module: Module) {
+    let amount = this.getInputValueAsNumber(module);
+    if (amount >= 0) {
+      this.setAmountNumber(module, amount);
+    } else {
+      this.resetInputValue(module);
+    }
+  }
+
+
+  getInputValueAsNumber(module: Module) {
+    return Number((document.getElementById(`${module.name}`) as HTMLInputElement).value);
+  }
+
+
+  setAmountNumber(module: Module, amount: number) {
+    this.list.forEach(item => {
+      if (item.name === module.name) {
+        item.amount = amount;
+      }
+    });
+  }
+
+
+  resetInputValue(module: Module) {
+    this.list.forEach(item => {
+      if (item.name === module.name) {
+        (document.getElementById(`${module.name}`) as HTMLInputElement).value = String(item.amount);
+      }
+    });
+  }
 
 }

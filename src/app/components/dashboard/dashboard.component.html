@@ -6,7 +6,8 @@
     <mat-label>Station Modules</mat-label>
     <mat-select>
       <mat-option>None</mat-option>
-      <mat-option *ngFor="let module of data" [value]="module.name" (click)="addToList(module)">{{module.name}}</mat-option>
+      <mat-option *ngFor="let module of data" [value]="module.name"
+        (click)="addToList(module)">{{module.name}}</mat-option>
     </mat-select>
   </mat-form-field>
 
@@ -19,7 +20,18 @@
     <!-- Amount Column -->
     <ng-container matColumnDef="amount">
       <th mat-header-cell *matHeaderCellDef> Amount </th>
-      <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
+      <td mat-cell *matCellDef="let element">
+
+        <form class="counter">
+          <mat-form-field>
+            <input matInput maxlength="3" value={{element.amount}} id={{element.name}} (keyup)="setAmount(element)" >
+          </mat-form-field>
+          <div class="vertical">
+            <button mat-button color="primary" (click)="increaseAmount(element)">+</button>
+            <button mat-button color="primary" (click)="decreaseAmount(element)">-</button>
+          </div>
+        </form>
+      </td>
     </ng-container>
 
     <!-- Name Column -->
@@ -28,7 +40,7 @@
       <td mat-cell *matCellDef="let element"> {{element.name}} </td>
     </ng-container>
 
-    <!-- Weight Column -->
+    <!-- Type Column -->
     <ng-container matColumnDef="type">
       <th mat-header-cell *matHeaderCellDef> Type </th>
       <td mat-cell *matCellDef="let element"> {{element.type}} </td>
