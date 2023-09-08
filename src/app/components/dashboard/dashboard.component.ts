@@ -28,7 +28,7 @@ export class DashboardComponent implements OnInit {
   public list: Module[] = [];
   copy: Module[] = [];
   filtering: boolean = false;
-  selection: Module[] = [];
+  selection: string[] = [];
   displayedColumns: string[] = ['amount', 'name', 'type'];
 
   @ViewChild(MatTable) table: MatTable<any> | undefined;
@@ -80,6 +80,7 @@ export class DashboardComponent implements OnInit {
   remove(module: Module) {
     this.list = this.list.filter(item => item.name !== module.name);
     this.copy = this.copy.filter(item => item.name !== module.name);
+    this.selection = this.selection.filter(item => item !== module.name);
     this.table?.renderRows();
   }
 

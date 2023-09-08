@@ -11,7 +11,7 @@
       </mat-select>
     </mat-form-field>
 
-    <button mat-button color="warn" (click)="openDialog()">
+    <button mat-button color="warn" (click)="openDialog()" [disabled]="selection.length === 0">
       <mat-icon aria-hidden="false" fontIcon="delete"></mat-icon>
       reset
     </button>
