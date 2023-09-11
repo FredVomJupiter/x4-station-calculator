@@ -1,4 +1,4 @@
-<section class="container">
+<section class="container-top">
 
   <h4>Select Station Module</h4>
 
@@ -20,7 +20,7 @@
 
 </section>
 
-<section class="container">
+<section class="container-bottom">
 
   <mat-form-field>
     <mat-label>Filter</mat-label>
@@ -38,14 +38,14 @@
           <input class="input-counter" maxlength="3" value={{element.amount}} id={{element.name}}
             (keyup)="setAmount(element)">
           <div class="vertical">
-            <button mat-button color="primary" (click)="increaseAmount(element)">
+            <button mat-button color="primary" class="icon-button-small" (click)="increaseAmount(element)">
               <mat-icon aria-hidden="false" fontIcon="add"></mat-icon>
             </button>
-            <button mat-button color="primary" (click)="decreaseAmount(element)">
+            <button mat-button color="primary" class="icon-button-small" (click)="decreaseAmount(element)">
               <mat-icon aria-hidden="false" fontIcon="remove"></mat-icon>
             </button>
           </div>
-          <button mat-button color="warn" (click)="remove(element)">
+          <button mat-button color="warn" class="icon-button-small" (click)="remove(element)">
             <mat-icon aria-hidden="false" fontIcon="delete"></mat-icon>
           </button>
         </form>
