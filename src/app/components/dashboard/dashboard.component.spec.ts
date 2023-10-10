@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DashboardComponent } from './dashboard.component';
+import { SummaryComponent } from '../summary/summary.component';
 import { MatDialog, MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -16,7 +17,10 @@ describe('DashboardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [DashboardComponent],
+      declarations: [
+        DashboardComponent,
+        SummaryComponent
+      ],
       imports: [
         MatDialogModule, // You should import MatDialogModule instead of MatDialog
         NoopAnimationsModule, // This is required to handle animations
