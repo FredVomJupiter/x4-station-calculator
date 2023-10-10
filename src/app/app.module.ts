@@ -16,6 +16,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
+import { SummaryComponent } from './components/summary/summary.component';
 
 
 
@@ -23,7 +24,8 @@ import { MatDialogModule } from '@angular/material/dialog';
   declarations: [
     AppComponent,
     DashboardComponent,
-    DeleteComponent
+    DeleteComponent,
+    SummaryComponent
   ],
   imports: [
     BrowserModule,
