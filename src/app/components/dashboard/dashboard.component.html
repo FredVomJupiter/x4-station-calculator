@@ -67,4 +67,10 @@
 
 </section>
 
+<!--
+  Summary toggled via button in Summary.
+  Closed Summary is at bottom of page.
+  Closed Summary will be hidden, if user scrolls to bottom of dashboard.
+  If Summary is open, dashboard overflow is hidden and dashboard will be scrolled to top.
+-->
 <app-summary [hide]="hide" (summaryOpen)="preventScolling($event)"></app-summary>

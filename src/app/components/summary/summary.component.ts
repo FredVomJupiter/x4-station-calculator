@@ -7,10 +7,11 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class SummaryComponent {
 
-  // Data send to dashboard component.
+  // Open is used to toggle the summary component here.
   open: boolean = false;
+  // If summary is open, tell dashboard component to prevent scrolling or vice versa.
   @Output() summaryOpen = new EventEmitter<boolean>();
-  // Data coming from dashboard component.
+  // If dashboard component is scrolled to the bottom, hide the summary component.
   @Input() hide: boolean = false;
 
 
