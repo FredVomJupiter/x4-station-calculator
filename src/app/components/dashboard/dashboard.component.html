@@ -24,7 +24,7 @@
 
   <mat-form-field>
     <mat-label>Filter</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="Filter" #input>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Filter Name or Type" #input>
   </mat-form-field>
 
   <table mat-table [dataSource]="list" class="mat-elevation-z8">
@@ -38,16 +38,10 @@
           <input class="input-counter" maxlength="3" value={{element.amount}} id={{element.name}}
             (keyup)="setAmount(element)">
           <div class="vertical">
-            <button mat-button color="primary" class="icon-button-small" (click)="increaseAmount(element)">
-              <mat-icon aria-hidden="false" fontIcon="add"></mat-icon>
-            </button>
-            <button mat-button color="primary" class="icon-button-small" (click)="decreaseAmount(element)">
-              <mat-icon aria-hidden="false" fontIcon="remove"></mat-icon>
-            </button>
+            <mat-icon class="setter" aria-hidden="false" fontIcon="add" (click)="increaseAmount(element)"></mat-icon>
+            <mat-icon class="setter" aria-hidden="false" fontIcon="remove" (click)="decreaseAmount(element)"></mat-icon>
           </div>
-          <button mat-button color="warn" class="icon-button-small" (click)="remove(element)">
-            <mat-icon aria-hidden="false" fontIcon="delete"></mat-icon>
-          </button>
+          <mat-icon class="delete" aria-hidden="false" fontIcon="delete" (click)="remove(element)"></mat-icon>
         </form>
       </td>
     </ng-container>

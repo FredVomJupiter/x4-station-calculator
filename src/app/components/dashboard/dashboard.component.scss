@@ -25,18 +25,40 @@ h4 {
     max-width: 1024px;
     height: fit-content;
     background-color: #1F1B24;
+
+    .setter {
+        text-align: center;
+        margin-left: 0.5rem;
+        cursor: pointer;
+
+        &:hover {
+            color: white;
+            background-color: rgba($color: black, $alpha: .4);
+            border-radius: 10px;
+        }
+    }
+
+    .delete {
+        margin-left: 0.5rem;
+        color: #f44336;
+        cursor: pointer;
+
+        &:hover {
+            color: white;
+            background-color: rgba($color: black, $alpha: .4);
+            border-radius: 10px;
+        }
+    }
 }
 
 .counter {
     display: flex;
-    width: 200px !important;
     box-sizing: border-box;
     align-items: center;
 }
 
 .input-counter {
     border: none;
-    border-bottom: 1px solid black;
     width: 50px;
     text-align: center;
     font-size: 1.5rem;
