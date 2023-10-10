@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, OnInit, Output, ViewChild } from '@angular/core';
 import { MatTable } from '@angular/material/table';
 import { DataService } from 'src/app/shared/data.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -32,6 +32,24 @@ export class DashboardComponent implements OnInit {
   displayedColumns: string[] = ['amount', 'name', 'type'];
 
   @ViewChild(MatTable) table: MatTable<any> | undefined;
+
+
+  // This is the variable that is used to hide the summary component when the user scrolls down.
+  @Output() hide: boolean = false;
+
+  // This is the function that is used to hide the summary component when the user scrolls down.
+  @HostListener('window:scroll', ['$event'])
+  onWindowScroll($event: any) {
+    const pos = (document.documentElement.scrollTop || document.body.scrollTop) + document.documentElement.offsetHeight;
+    const max = document.documentElement.scrollHeight;
+    
+    if (pos === max)  {
+      console.log("bottom");
+      this.hide = true;
+    } else {
+      this.hide = false;
+    }
+  }
 
 
   constructor(
@@ -167,6 +185,15 @@ export class DashboardComponent implements OnInit {
         this.removeAll();
       }
     });
+  }
+
+  preventScolling($event: any) {
+    if ($event == true) {
+      document.body.style.overflow = 'hidden';
+      document.documentElement.scrollTop = 0;
+    } else {
+      document.body.style.overflow = 'auto';
+    }
   }
 
 }

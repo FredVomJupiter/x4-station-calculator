@@ -1,1 +1,9 @@
-<p>summary works!</p>
+<section [class.summary]="open" [class.closed]="!open" [class.hidden]="hide">
+    <span>Summary</span>
+    <button (click)="toggleSummary()" *ngIf="open" mat-button>
+        <mat-icon aria-hidden="false" fontIcon="expand_more"></mat-icon>
+    </button>
+    <button (click)="toggleSummary()" *ngIf="!open" mat-button>
+        <mat-icon aria-hidden="false" fontIcon="expand_more" class="rotate"></mat-icon>
+    </button>
+</section>
