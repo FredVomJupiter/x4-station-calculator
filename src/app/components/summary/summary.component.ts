@@ -1,5 +1,15 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
+
+interface Module {
+  name: string;
+  type: string;
+  style: string;
+  input: object[] | null;
+  output: object[] | null;
+  amount: number;
+}
+
 @Component({
   selector: 'app-summary',
   templateUrl: './summary.component.html',
@@ -13,6 +23,8 @@ export class SummaryComponent {
   @Output() summaryOpen = new EventEmitter<boolean>();
   // If dashboard component is scrolled to the bottom, hide the summary component.
   @Input() hide: boolean = false;
+
+  @Input() list: Module[] = [];
 
 
   constructor() { }

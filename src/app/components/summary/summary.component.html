@@ -6,4 +6,9 @@
     <button (click)="toggleSummary()" *ngIf="!open" mat-button>
         <mat-icon aria-hidden="false" fontIcon="expand_more" class="rotate"></mat-icon>
     </button>
+
+    <div *ngIf="list.length > 0" [class.listing]="open" [class.hidden]="!open">
+        <span *ngFor="let module of list">{{ module.amount }} x {{ module.name }}</span>
+
+    </div>
 </section>

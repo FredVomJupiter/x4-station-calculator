@@ -21,11 +21,12 @@ interface Module {
 })
 export class DashboardComponent implements OnInit {
 
+  // Store the data from the data service in a variable for the table.
   data = this.dataService.getData().modules
     .sort((a: { name: string; }, b: { name: any; }) =>
       a.name.localeCompare(b.name));
 
-  public list: Module[] = [];
+  @Output() public list: Module[] = [];
   copy: Module[] = [];
   filtering: boolean = false;
   selection: string[] = [];
@@ -186,6 +187,7 @@ export class DashboardComponent implements OnInit {
       }
     });
   }
+
 
   preventScolling($event: any) {
     if ($event == true) {
