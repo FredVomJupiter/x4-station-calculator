@@ -10,8 +10,8 @@
 
     <div *ngIf="list.length > 0" [class.listing]="open" [class.hidden]="!open">
         <button (click)="toggleDeficit()" mat-button class="small white extra">
-            <u> Deficit Overview </u>
-            <mat-icon aria-hidden="false" fontIcon="expand_more" [class.rotate]="expandOverview"></mat-icon>
+            <u> Deficit-Surplus Overview </u>
+            <mat-icon aria-hidden="false" fontIcon="expand_more" [class.rotate]="expandDeficit"></mat-icon>
         </button>
 
         <div class="flex-row margin-left-big" [class.hidden]="!expandDeficit">
@@ -21,7 +21,7 @@
                 </div>
                 <div *ngFor="let def of deficit" class="red">
                     <div *ngIf="def.amount > 0">
-                        {{ def.amount }} x {{ def.name }}
+                        {{ def.amount }} {{ def.name }}
                     </div>
                 </div>
             </div>
@@ -30,7 +30,7 @@
                     Surplus
                 </div>
                 <div *ngFor="let sur of surplus" class="green">
-                    {{ sur.amount }} x {{ sur.name }}
+                    {{ sur.amount }} {{ sur.name }}
                 </div>
             </div>
         </div>
@@ -46,7 +46,7 @@
                     Input
                 </div>
                 <div *ngFor="let input of inputs" class="white">
-                    {{ input.amount }} x {{ input.name }}
+                    {{ input.amount }} {{ input.name }}
                 </div>
             </div>
             <div class="box margin-left">
@@ -54,7 +54,7 @@
                     Output
                 </div>
                 <div *ngFor="let output of outputs" class="white">
-                    {{ output.amount }} x {{ output.name }}
+                    {{ output.amount }} {{ output.name }}
                 </div>
             </div>
         </div>
@@ -67,7 +67,7 @@
         <span *ngFor="let module of list; index as i" [class.hidden]="!expandList">
             <div class="flex-row">
                 <button (click)="toggleDetails(i)" mat-button class="small white">
-                    {{ module.amount }} x {{ module.name }}
+                    {{ module.amount }} {{ module.name }}
                     <mat-icon aria-hidden="false" fontIcon="expand_more"></mat-icon>
                 </button>
             </div>
