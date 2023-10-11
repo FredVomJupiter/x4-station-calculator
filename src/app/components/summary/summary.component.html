@@ -1,21 +1,77 @@
 <section [class.summary]="open" [class.closed]="!open" [class.hidden]="hide">
-    <span>Summary</span>
-    <button (click)="toggleSummary()" *ngIf="open" mat-button class="button-special">
-        <mat-icon aria-hidden="false" fontIcon="expand_more"></mat-icon>
+    <button (click)="toggleSummary()" *ngIf="open" mat-button class="button-special white">
+        Summary
+        <mat-icon aria-hidden="false" fontIcon="close"></mat-icon>
     </button>
-    <button (click)="toggleSummary()" *ngIf="!open" mat-button class="button-special">
+    <button (click)="toggleSummary()" *ngIf="!open" mat-button class="button-special white">
+        Summary
         <mat-icon aria-hidden="false" fontIcon="expand_more" class="rotate"></mat-icon>
     </button>
 
     <div *ngIf="list.length > 0" [class.listing]="open" [class.hidden]="!open">
-        <span *ngFor="let module of list; index as i">
+        <button (click)="toggleDeficit()" mat-button class="small white extra">
+            <u> Deficit Overview </u>
+            <mat-icon aria-hidden="false" fontIcon="expand_more" [class.rotate]="expandOverview"></mat-icon>
+        </button>
+
+        <div class="flex-row margin-left-big" [class.hidden]="!expandDeficit">
+            <div class="box margin-left">
+                <div class="red">
+                    Deficit
+                </div>
+                <div *ngFor="let def of deficit" class="red">
+                    <div *ngIf="def.amount > 0">
+                        {{ def.amount }} x {{ def.name }}
+                    </div>
+                </div>
+            </div>
+            <div class="box margin-left">
+                <div class="green">
+                    Surplus
+                </div>
+                <div *ngFor="let sur of surplus" class="green">
+                    {{ sur.amount }} x {{ sur.name }}
+                </div>
+            </div>
+        </div>
+
+        <button (click)="toggleOverview()" mat-button class="small white extra">
+            <u> Input-Output Overview </u>
+            <mat-icon aria-hidden="false" fontIcon="expand_more" [class.rotate]="expandOverview"></mat-icon>
+        </button>
+
+        <div class="flex-row margin-left-big" [class.hidden]="!expandOverview">
+            <div class="box">
+                <div class="red">
+                    Input
+                </div>
+                <div *ngFor="let input of inputs" class="white">
+                    {{ input.amount }} x {{ input.name }}
+                </div>
+            </div>
+            <div class="box margin-left">
+                <div class="green">
+                    Output
+                </div>
+                <div *ngFor="let output of outputs" class="white">
+                    {{ output.amount }} x {{ output.name }}
+                </div>
+            </div>
+        </div>
+
+        <button (click)="toggleList()" mat-button class="small white extra">
+            <u> Module Details </u>
+            <mat-icon aria-hidden="false" fontIcon="expand_more" [class.rotate]="expandList"></mat-icon>
+        </button>
+
+        <span *ngFor="let module of list; index as i" [class.hidden]="!expandList">
             <div class="flex-row">
-                {{ module.amount }} x {{ module.name }}
-                <button (click)="toggleDetails(i)" mat-button class="small">
+                <button (click)="toggleDetails(i)" mat-button class="small white">
+                    {{ module.amount }} x {{ module.name }}
                     <mat-icon aria-hidden="false" fontIcon="expand_more"></mat-icon>
                 </button>
             </div>
-            
+
 
             <div class="flex-row" [attr.id]="i" [class.hidden]="check(i) == false">
                 <div class="box">
@@ -29,7 +85,8 @@
                     </div>
                 </div>
             </div>
-            
+
         </span>
+
     </div>
 </section>

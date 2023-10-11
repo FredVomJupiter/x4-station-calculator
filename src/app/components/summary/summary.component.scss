@@ -85,7 +85,7 @@ mat-icon {
 .box {
     display: flex;
     flex-direction: column;
-    text-align: end;
+    text-align: start;
     width: 100%;
 }
 
@@ -99,6 +99,32 @@ mat-icon {
     margin-left: 0.5rem;
 }
 
+.margin-left-big {
+    margin-left: 1rem;
+}
+
 .small {
     height: fit-content;
+}
+
+.white {
+    color: rgba($color: white, $alpha: .4);
+}
+
+.extra {
+    height: 30px;
+    margin: 1rem 0;
+}
+
+
+@media screen and (min-width: 600px ) {
+    
+    .box {
+        width: unset;
+    }
+
+    .flex-row {
+        justify-content: center;
+        gap: 1rem;
+    }
 }

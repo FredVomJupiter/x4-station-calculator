@@ -19,6 +19,12 @@ export class SummaryComponent {
 
   // Open is used to toggle the summary component here.
   open: boolean = false;
+  // Toggle for deficit.
+  expandDeficit: boolean = false;
+  // Toggle for Input/Output overview.
+  expandOverview: boolean = false;
+  // Toggle for module list.
+  expandList: boolean = false;
   // If summary is open, tell dashboard component to prevent scrolling or vice versa.
   @Output() summaryOpen = new EventEmitter<boolean>();
   // If dashboard component is scrolled to the bottom, hide the summary component.
@@ -29,6 +35,12 @@ export class SummaryComponent {
   // This array is used to toggle the details of a module.
   // If an index is in the array, the respective details are shown.
   toggle: number[] = [];
+
+
+  @Input() inputs: { name: string, amount: number }[] = [];
+  @Input() outputs: { name: string, amount: number }[] = [];
+  @Input() deficit: { name: string, amount: number }[] = [];
+  @Input() surplus: { name: string, amount: number }[] = [];
 
 
   constructor() { }
@@ -44,6 +56,33 @@ export class SummaryComponent {
     } else {
       this.open = true;
       this.summaryOpen.emit(true);
+    }
+  }
+
+
+  toggleDeficit() {
+    if (this.expandDeficit == true) {
+      this.expandDeficit = false;
+    } else {
+      this.expandDeficit = true;
+    }
+  }
+
+
+  toggleOverview() {
+    if (this.expandOverview == true) {
+      this.expandOverview = false;
+    } else {
+      this.expandOverview = true;
+    }
+  }
+
+
+  toggleList() {
+    if (this.expandList == true) {
+      this.expandList = false;
+    } else {
+      this.expandList = true;
     }
   }
 
