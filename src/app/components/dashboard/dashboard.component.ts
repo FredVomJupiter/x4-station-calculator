@@ -9,8 +9,8 @@ interface Module {
   name: string;
   type: string;
   style: string;
-  input: object[] | null;
-  output: object[] | null;
+  input: { name: string, amount: number }[] | null;
+  output: { name: string, amount: number }[] | null;
   amount: number;
 }
 
