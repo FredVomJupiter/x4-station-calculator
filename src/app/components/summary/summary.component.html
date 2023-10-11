@@ -30,7 +30,12 @@
                     Surplus
                 </div>
                 <div *ngFor="let sur of surplus" class="green">
-                    {{ sur.amount }} {{ sur.name }}
+                    <div *ngIf="sur.amount < 0">
+                        {{ sur.amount * -1 }} {{ sur.name }}
+                    </div>
+                    <div *ngIf="sur.amount >= 0">
+                        {{ sur.amount }} {{ sur.name }}
+                    </div>
                 </div>
             </div>
         </div>
