@@ -255,7 +255,9 @@ export class DashboardComponent implements OnInit {
     this.deficit = [];
     this.inputs.forEach(input => {
       if (this.outputs.find(i => i.name == input.name)) {
-        this.deficit.push({ name: input.name, amount: input.amount - this.outputs.find(i => i.name == input.name)!.amount });
+        if (input.amount - this.outputs.find(i => i.name == input.name)!.amount > 0) {
+          this.deficit.push({ name: input.name, amount: input.amount - this.outputs.find(i => i.name == input.name)!.amount });
+        }
       } else {
         this.deficit.push({ name: input.name, amount: input.amount });
       }
@@ -267,7 +269,9 @@ export class DashboardComponent implements OnInit {
     this.surplus = [];
     this.outputs.forEach(output => {
       if (this.inputs.find(i => i.name == output.name)) {
-        this.surplus.push({ name: output.name, amount: output.amount - this.inputs.find(i => i.name == output.name)!.amount });
+        if (output.amount - this.inputs.find(i => i.name == output.name)!.amount > 0) {
+          this.surplus.push({ name: output.name, amount: output.amount - this.inputs.find(i => i.name == output.name)!.amount });
+        }
       } else {
         this.surplus.push({ name: output.name, amount: output.amount });
       }
