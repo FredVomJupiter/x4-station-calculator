@@ -1,14 +1,35 @@
 <section [class.summary]="open" [class.closed]="!open" [class.hidden]="hide">
     <span>Summary</span>
-    <button (click)="toggleSummary()" *ngIf="open" mat-button>
+    <button (click)="toggleSummary()" *ngIf="open" mat-button class="button-special">
         <mat-icon aria-hidden="false" fontIcon="expand_more"></mat-icon>
     </button>
-    <button (click)="toggleSummary()" *ngIf="!open" mat-button>
+    <button (click)="toggleSummary()" *ngIf="!open" mat-button class="button-special">
         <mat-icon aria-hidden="false" fontIcon="expand_more" class="rotate"></mat-icon>
     </button>
 
     <div *ngIf="list.length > 0" [class.listing]="open" [class.hidden]="!open">
-        <span *ngFor="let module of list">{{ module.amount }} x {{ module.name }}</span>
+        <span *ngFor="let module of list; index as i">
+            <div class="flex-row">
+                {{ module.amount }} x {{ module.name }}
+                <button (click)="toggleDetails(i)" mat-button class="small">
+                    <mat-icon aria-hidden="false" fontIcon="expand_more"></mat-icon>
+                </button>
+            </div>
+            
 
+            <div class="flex-row" [attr.id]="i" [class.hidden]="check(i) == false">
+                <div class="box">
+                    <div *ngFor="let input of module.input" class="red">
+                        {{ module.amount * input.amount }} {{ input.name }}
+                    </div>
+                </div>
+                <div class="box margin-left">
+                    <div *ngFor="let output of module.output" class="green">
+                        {{ module.amount * output.amount }} {{ output.name }}
+                    </div>
+                </div>
+            </div>
+            
+        </span>
     </div>
 </section>
